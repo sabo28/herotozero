@@ -9,6 +9,13 @@
 </h:head>
 
 <h:body>
-    <h1>Like Hero To Zero</h1>
+    <div>
+        <h1>Like Hero To Zero</h1>
+
+        <h:form>
+            <p:inputText id="searchInput" /> <!-- value="#{bean.searchText}" -->
+            <p:commandButton value="Suchen" /> <!-- action="#{bean.search}" update="resultPanel" -->
+        </h:form>
+    </div>
 </h:body>
 </html>
