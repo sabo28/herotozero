@@ -13,9 +13,11 @@
         <h1>Like Hero To Zero</h1>
 
         <h:form>
-            <p:inputText id="searchInput" /> <!-- value="#{bean.searchText}" -->
-            <p:commandButton value="Suchen" /> <!-- action="#{bean.search}" update="resultPanel" -->
+            <p:inputText id="searchInput" value="#{co2EmissionBean.country}"/>
+            <p:commandButton value="Suchen" action="#{co2EmissionBean.data()}" update="emissionData"/>
+            <h:outputText id="emissionData" value="#{co2EmissionBean.emissionData}"/>
         </h:form>
+
     </div>
 </h:body>
 </html>
