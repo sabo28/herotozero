@@ -2,11 +2,13 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.io.IOException;
+
 @Named
 @RequestScoped
 public class Co2EmissionBean {
     private String country;
-    private int emissionData;
+    private String emissionData;
 
     public Co2EmissionBean() {
     }
@@ -21,11 +23,11 @@ public class Co2EmissionBean {
         this.country = country;
     }
 
-    public int getEmissionData() {
+    public String getEmissionData() {
         return emissionData;
     }
 
-    public void data() {
+    public void data() throws IOException {
         this.emissionData = dataController.getEmissionData(country);
     }
 }
