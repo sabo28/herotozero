@@ -2,8 +2,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-import java.io.IOException;
-
 @Named
 @RequestScoped
 public class Co2EmissionBean {
@@ -27,7 +25,7 @@ public class Co2EmissionBean {
         return emissionData;
     }
 
-    public void data() throws IOException {
+    public void data() throws ClassNotFoundException {
         this.emissionData = dataController.getEmissionData(country);
     }
 }

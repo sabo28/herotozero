@@ -1,14 +1,13 @@
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-
-import java.io.IOException;
+import java.util.Objects;
 
 @Named
 @RequestScoped
 public class DataController {
-
-    public String getEmissionData(String country) throws IOException {
-        DataService dataService = new DataService();
-        return dataService.fetchCSVData(country);
+    private final DataService dataService = new DataService();
+    public String getEmissionData(String country) throws ClassNotFoundException {
+        String emissionData = dataService.fetch(country);
+        return (!Objects.equals(emissionData, "")) ? emissionData : "Emissionswert nicht gefunden";
     }
 }

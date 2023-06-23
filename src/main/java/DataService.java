@@ -1,27 +1,27 @@
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.sql.*;
 
 public class DataService {
 
-    public String fetchCSVData(String country) throws IOException {
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/co2emissiondata";
+    private static final String DB_USERNAME = "root";
+    private static final String DB_PASSWORD = "password";
 
-        final String CSV_URL = "https://myco2emissionbucket.s3.eu-central-1.amazonaws.com/world-bank-group-data/CO2_emissions/latest/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_5551845.csv";
+    public String fetch(String country) throws ClassNotFoundException {
+        String emissionData = "";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+            String query = "SELECT emissionswert FROM emissions WHERE land = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, country);
 
-        try (ByteArrayInputStream inputStream = new ByteArrayInputStream(new URL(CSV_URL).openStream().readAllBytes());
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length > 1 && parts[0].trim().equalsIgnoreCase('"' + country + '"')) {
-                    return parts[63].trim();
-                }
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                emissionData = resultSet.getString("emissionswert");
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        return "No data available for this country";
+        return emissionData;
     }
 }
