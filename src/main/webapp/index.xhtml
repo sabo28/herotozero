@@ -10,18 +10,47 @@
 </h:head>
 
 <h:body>
-    <div class="container">
-        <div class="search-box">
+    <p:outputPanel id="container">
+        <h:form id="search-box">
+                <!-- PrimeFaces components here -->
             <i class="fa-solid fa-location-dot"></i>
-            <p:inputText placeholder="Enter your location" type="text" value="#{co2EmissionBean.country}"/>
-            <p:commandButton action="#{co2EmissionBean.data()}"/>
-        </div>
-    <!--<h:outputText id="emissionData" value="#{co2EmissionBean.emissionData}"/> -->
+            <p:inputText id="input-text" placeholder="Enter your location" type="text" value="#{co2EmissionBean.country}"/>
+            <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-primary" action="#{co2EmissionBean.data()}" update="emission-data"/>
+        </h:form>
 
-        <div class="not-found">
+        <p:outputPanel id="not-found">
             <h:graphicImage value = "/images/404.png" />
-            <h:outputText value="Oops! Invalid location :/" />
-        </div>
-    </div>
+            <h:outputText id="invalid-location" value="Oops! Invalid location :/" />
+        </p:outputPanel>
+
+        <p:outputPanel id="result-box">
+            <h:outputText id="emission-data" value="#{co2EmissionBean.emissionData}"/>
+        </p:outputPanel>
+    </p:outputPanel>
+
+    <script>
+        const search = document.querySelector('#search-box button');
+        const resultBox = document.querySelector('#result-box');
+        const container = document.querySelector('#container');
+        const error404 = document.querySelector('#not-found');
+
+        search.addEventListener('click', () => {
+            setTimeout(function () {
+                if(document.querySelector('#emission-data').innerText === ''){
+                    console.log('Not found');
+                    container.style.height = '400px';
+                    resultBox.style.display = 'none';
+                    error404.style.display = 'block';
+                    error404.classList.add('fade-in');
+                }
+            }, 800);
+
+            error404.style.display = 'none';
+            error404.classList.remove('fade-in');
+            resultBox.style.display = '';
+            resultBox.classList.add('fade-in');
+            container.style.height = '400px';
+        })
+    </script>
 </h:body>
 </html>
