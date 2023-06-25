@@ -6,6 +6,6 @@ import jakarta.inject.Named;
 public class DataController {
     private final DataService dataService = new DataService();
     public String getEmissionData(String country) throws ClassNotFoundException {
-        return dataService.fetch(country);
+        return dataService.fetch(country).isEmpty() ? dataService.fetch(country) : dataService.fetch(country) + "kt";
     }
 }

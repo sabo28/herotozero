@@ -5,11 +5,13 @@
 
 <h:head>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@300;400;500;700;900&amp;display=swap"/>
     <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
     <title>Like Hero To Zero</title>
 </h:head>
 
 <h:body>
+    <p:outputPanel id="overlay"/>
     <p:outputPanel id="container">
         <h:form id="search-box">
                 <!-- PrimeFaces components here -->
@@ -28,11 +30,29 @@
         </p:outputPanel>
     </p:outputPanel>
 
+    <p:outputPanel id="login-button">
+        <h:outputText id="login-text" value="login"/>
+    </p:outputPanel>
+
+    <p:outputPanel id="login-form">
+
+    </p:outputPanel>
+
     <script>
         const search = document.querySelector('#search-box button');
         const resultBox = document.querySelector('#result-box');
         const container = document.querySelector('#container');
         const error404 = document.querySelector('#not-found');
+        const loginButton = document.querySelector('#login-button');
+        const overlay = document.querySelector('#overlay');
+        const loginForm = document.querySelector('#login-form');
+
+        loginButton.addEventListener('click', () => {
+            overlay.style.visibility = 'visible';
+            overlay.style.opacity = '0.5'
+            loginForm.style.visibility = 'visible';
+            loginForm.style.opacity = '1';
+        })
 
         search.addEventListener('click', () => {
             setTimeout(function () {
@@ -43,11 +63,11 @@
                     error404.style.display = 'block';
                     error404.classList.add('fade-in');
                 }
-            }, 800);
+            }, 600)
 
             error404.style.display = 'none';
             error404.classList.remove('fade-in');
-            resultBox.style.display = '';
+            resultBox.style.display = 'block';
             resultBox.classList.add('fade-in');
             container.style.height = '400px';
         })
