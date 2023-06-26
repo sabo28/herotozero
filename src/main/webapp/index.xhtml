@@ -40,9 +40,8 @@
             <h:form id="login-form">
                 <p:inputText type="text" id="username-input" required="true" placeholder="Username" value="#{loginBean.username}"/>
                 <p:password id="password-input" required="true" placeholder="Password" value="#{loginBean.password}"/>
-                <p:commandButton type="submit" id="submit-button" value="Login" action="#{loginBean.login()}" update="message"/>
+                <p:commandButton type="submit" id="submit-button" value="Login" action="#{loginBean.login()}"/>
             </h:form>
-                <h:outputText id="message" value="#{loginBean.loginStatus}"/>
     </p:outputPanel>
 
     <script>
@@ -53,7 +52,6 @@
         const loginButton = document.querySelector('#login-button');
         const overlay = document.querySelector('#overlay');
         const loginForm = document.querySelector('#login-panel');
-        const message = document.querySelector('#message');
 
         loginButton.addEventListener('click', () => {
             overlay.style.visibility = 'visible';

@@ -1,13 +1,14 @@
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
+
 @Named
-@RequestScoped
-public class LoginBean {
+@SessionScoped
+public class LoginBean implements Serializable {
     private String username;
     private String password;
-    private String loginStatus;
 
     public LoginBean() {
     }
@@ -31,11 +32,7 @@ public class LoginBean {
         this.password = password;
     }
 
-    public String getLoginStatus() {
-        return loginStatus;
-    }
-
-    public void login() throws ClassNotFoundException {
-        this.loginStatus = dataController.loginUser(username, password);
+    public String login() throws ClassNotFoundException {
+        return dataController.loginUser(username, password);
     }
 }

@@ -7,7 +7,7 @@ cnx = mysql.connector.connect(user='root', password='password',
                               host='localhost',
                               database='co2emissiondata')
 
-# Erstellung der Tabelle "emissions", falls sie nicht existiert
+# Erstellung der Tabelle "emissions", "users" und "pendingrequests", falls sie nicht existiert
 create_table_emissions_query = """
 CREATE TABLE IF NOT EXISTS emissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,19 +24,29 @@ CREATE TABLE IF NOT EXISTS users (
 )
 """
 
+create_table_pendingrequests_query = """
+CREATE TABLE IF NOT EXISTS pendingrequests (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    scientist VARCHAR(255),
+    land VARCHAR(255),
+    emissionwert VARCHAR(255)
+)
+"""
+
 cursor = cnx.cursor()
 cursor.execute(create_table_emissions_query)
 cursor.execute(create_table_users_query)
-cnx.commit()
+cursor.execute(create_table_pendingrequests_query)
 
 # Users initialisieren
 
-query = "INSERT INTO users (username, password) VALUES ('admin', 'password')"
+query_1 = "INSERT INTO users (username, password) SELECT 'admin', 'password'"
+query_2 = "INSERT INTO users (username, password) SELECT 'scientist', 'Scientist123'"
 
 # Daten in die Datenbank einfügen
 cursor = cnx.cursor()
-cursor.execute(query)
-cnx.commit()
+cursor.execute(query_1)
+cursor.execute(query_2)
 
 # Link zur CSV-Datei
 csv_url = 'https://myco2emissionbucket.s3.eu-central-1.amazonaws.com/world-bank-group-data/CO2_emissions/latest/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_5551845.csv'
@@ -68,7 +78,7 @@ for row in csv_file:
     # Daten in die Datenbank einfügen
     cursor = cnx.cursor()
     cursor.execute(query, (land, emissionswert))
-    cnx.commit()
 
 # Verbindung zur Datenbank schließen
+cnx.commit()
 cnx.close()
