@@ -8,15 +8,34 @@ cnx = mysql.connector.connect(user='root', password='password',
                               database='co2emissiondata')
 
 # Erstellung der Tabelle "emissions", falls sie nicht existiert
-create_table_query = """
+create_table_emissions_query = """
 CREATE TABLE IF NOT EXISTS emissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     land VARCHAR(255),
     emissionswert VARCHAR(255)
 )
 """
+
+create_table_users_query = """
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255),
+    password VARCHAR(255)
+)
+"""
+
 cursor = cnx.cursor()
-cursor.execute(create_table_query)
+cursor.execute(create_table_emissions_query)
+cursor.execute(create_table_users_query)
+cnx.commit()
+
+# Users initialisieren
+
+query = "INSERT INTO users (username, password) VALUES ('admin', 'password')"
+
+# Daten in die Datenbank einfügen
+cursor = cnx.cursor()
+cursor.execute(query)
 cnx.commit()
 
 # Link zur CSV-Datei

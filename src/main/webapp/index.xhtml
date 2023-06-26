@@ -14,7 +14,6 @@
     <p:outputPanel id="overlay"/>
     <p:outputPanel id="container">
         <h:form id="search-box">
-                <!-- PrimeFaces components here -->
             <i class="fa-solid fa-location-dot"></i>
             <p:inputText id="input-text" placeholder="Enter your location" type="text" value="#{co2EmissionBean.country}"/>
             <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-primary" action="#{co2EmissionBean.data()}" update="emission-data"/>
@@ -34,8 +33,16 @@
         <h:outputText id="login-text" value="login"/>
     </p:outputPanel>
 
-    <p:outputPanel id="login-form">
-
+    <p:outputPanel id="login-panel">
+            <p:outputPanel id="headline-login">
+                <h1>Login</h1>
+            </p:outputPanel>
+            <h:form id="login-form">
+                <p:inputText type="text" id="username-input" required="true" placeholder="Username" value="#{loginBean.username}"/>
+                <p:password id="password-input" required="true" placeholder="Password" value="#{loginBean.password}"/>
+                <p:commandButton type="submit" id="submit-button" value="Login" action="#{loginBean.login()}" update="message"/>
+            </h:form>
+                <h:outputText id="message" value="#{loginBean.loginStatus}"/>
     </p:outputPanel>
 
     <script>
@@ -45,14 +52,22 @@
         const error404 = document.querySelector('#not-found');
         const loginButton = document.querySelector('#login-button');
         const overlay = document.querySelector('#overlay');
-        const loginForm = document.querySelector('#login-form');
+        const loginForm = document.querySelector('#login-panel');
+        const message = document.querySelector('#message');
 
         loginButton.addEventListener('click', () => {
             overlay.style.visibility = 'visible';
             overlay.style.opacity = '0.5'
             loginForm.style.visibility = 'visible';
             loginForm.style.opacity = '1';
-        })
+        });
+
+        overlay.addEventListener('click', () => {
+            overlay.style.visibility = 'hidden';
+            overlay.style.opacity = '0'
+            loginForm.style.visibility = 'hidden';
+            loginForm.style.opacity = '0';
+        });
 
         search.addEventListener('click', () => {
             setTimeout(function () {
@@ -63,14 +78,14 @@
                     error404.style.display = 'block';
                     error404.classList.add('fade-in');
                 }
-            }, 600)
+            }, 600);
 
             error404.style.display = 'none';
             error404.classList.remove('fade-in');
             resultBox.style.display = 'block';
             resultBox.classList.add('fade-in');
             container.style.height = '400px';
-        })
+        });
     </script>
 </h:body>
 </html>
