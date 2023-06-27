@@ -10,11 +10,13 @@
 </h:head>
 
 <h:body>
-    <h:form>
+    <h:form id="request-form">
+        <h1>Anfrage</h1>
+        <p>Neue Emissionsdaten müssen erst Bestätigt werden bevor sie sicht</p>
         <p:selectOneMenu value="#{allCountriesBean.selectedCountry}" required="true">
             <f:selectItems value="#{allCountriesBean.options}" />
         </p:selectOneMenu>
-        <h:inputText value="#{allCountriesBean.inputValue}" required="true"/>
+        <h:inputText id="input-value" value="#{allCountriesBean.inputValue}"/>
         <p:commandButton value="Submit" action="#{allCountriesBean.submitData()}" update="pending-status"/>
         <h:outputText id="pending-status" value="#{allCountriesBean.pendingStatus}"/>
     </h:form>

@@ -2,7 +2,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.util.List;
 
 @Named
@@ -44,7 +43,12 @@ public class AllCountriesBean {
     public String getPendingStatus() {
         return pendingStatus;
     }
+
     public void submitData() throws ClassNotFoundException {
-        this.pendingStatus = dataController.sendNewEmissionData(selectedCountry, inputValue, loginBean.getUsername());
+        if (!inputValue.matches("[0-9]+([.,][0-9]+)?")) {
+            this.pendingStatus = "Fehler: Es dürfen nur Zahlen eingegeben werden.";
+        }else {
+            this.pendingStatus = dataController.sendNewEmissionData(selectedCountry, inputValue, loginBean.getUsername());
+        }
     }
 }
