@@ -22,4 +22,8 @@ public class DataController {
     public String sendNewEmissionData(String selectedCountry, String inputValue, String username) throws ClassNotFoundException {
         return dataService.sendNewEmissionData(selectedCountry, inputValue, username);
     }
+
+    public List<PendingRequest> getAllPendingRequests() throws ClassNotFoundException {
+        return dataService.getAllPendingRequests();
+    }
 }

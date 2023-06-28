@@ -3,12 +3,14 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {
     private String username;
     private String password;
+    private String errorMessage;
 
     public LoginBean() {
     }
@@ -32,7 +34,17 @@ public class LoginBean implements Serializable {
         this.password = password;
     }
 
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
     public String login() throws ClassNotFoundException {
-        return dataController.loginUser(username, password);
+        String status = dataController.loginUser(username, password);
+        if(Objects.equals(status, "Wrong username or password")){
+            this.username = "";
+            this.password = "";
+            this.errorMessage = status;
+        }
+        return status;
     }
 }

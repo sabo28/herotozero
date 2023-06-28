@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+   <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@300;400;500;700;900&amp;display=swap"/>
+   <title>Like Hero To Zero</title>
+</h:head>
+<h:body>
+   <h:dataTable value="#{pendingRequestBean.requests}" var="pendingRequest">
+      <h:column>
+         <f:facet name="header">ID</f:facet>
+         #{pendingRequest.id}
+      </h:column>
+      <h:column>
+         <f:facet name="header">Username</f:facet>
+         #{pendingRequest.username}
+      </h:column>
+      <h:column>
+         <f:facet name="header">Land</f:facet>
+         #{pendingRequest.country}
+      </h:column>
+      <h:column>
+         <f:facet name="header">Emissionswert</f:facet>
+         #{pendingRequest.emissionData}
+      </h:column>
+      <h:column>
+         <f:facet name="header">Aktionen</f:facet>
+         <p:commandButton value="Löschen" action="#{pendingRequestBean.deleteRequest()}"/>
+         <p:commandButton value="Bestätigen" action="#{pendingRequestBean.confirmRequest()}"/>
+      </h:column>
+   </h:dataTable>
+</h:body>
+
+</html>

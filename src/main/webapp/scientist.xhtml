@@ -6,13 +6,14 @@
 
 <h:head>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@300;400;500;700;900&amp;display=swap"/>
     <title>Like Hero To Zero</title>
 </h:head>
 
 <h:body>
     <h:form id="request-form">
         <h1>Anfrage</h1>
-        <p>Neue Emissionsdaten müssen erst Bestätigt werden bevor sie sicht</p>
+        <p>Neue Emissionsdaten müssen erst bestätigt werden, bevor sie sichtbar sind.</p>
         <p:selectOneMenu value="#{allCountriesBean.selectedCountry}" required="true">
             <f:selectItems value="#{allCountriesBean.options}" />
         </p:selectOneMenu>

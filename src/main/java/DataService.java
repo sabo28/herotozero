@@ -31,7 +31,7 @@ public class DataService {
         String userStatus = "";
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+            String query = "SELECT * FROM users WHERE BINARY username = ? AND BINARY password = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, password);
@@ -78,7 +78,7 @@ public class DataService {
         String pendingStatus = "";
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            String query = "INSERT INTO pendingrequests (scientist, land, emissionwert) VALUES (?, ?, ?)";
+            String query = "INSERT INTO pendingrequests (username, land, emissionwert) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, selectedCountry);
@@ -94,5 +94,30 @@ public class DataService {
 
         return pendingStatus;
 
+    }
+
+    public List<PendingRequest> getAllPendingRequests() throws ClassNotFoundException {
+        List<PendingRequest> requests = new ArrayList<>();
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+            String query = "SELECT * FROM pendingrequests";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Daten aus der Datenbank lesen und zur userList hinzufügen
+                PendingRequest pendingRequest = new PendingRequest();
+                pendingRequest.setId(resultSet.getInt("id"));
+                pendingRequest.setUsername(resultSet.getString("username"));
+                pendingRequest.setCountry(resultSet.getString("land"));
+                pendingRequest.setEmissionData(resultSet.getString("emissionwert"));
+
+                requests.add(pendingRequest);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return requests;
     }
 }

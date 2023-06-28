@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS users (
 create_table_pendingrequests_query = """
 CREATE TABLE IF NOT EXISTS pendingrequests (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    scientist VARCHAR(255),
+    username VARCHAR(255),
     land VARCHAR(255),
     emissionwert VARCHAR(255)
 )

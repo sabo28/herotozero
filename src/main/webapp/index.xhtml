@@ -6,7 +6,7 @@
 <h:head>
     <link rel="stylesheet" type="text/css" media="screen" href="style.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;family=Roboto:wght@300;400;500;700;900&amp;display=swap"/>
-    <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"/>
     <title>Like Hero To Zero</title>
 </h:head>
 
@@ -40,7 +40,8 @@
             <h:form id="login-form">
                 <p:inputText type="text" id="username-input" required="true" placeholder="Username" value="#{loginBean.username}"/>
                 <p:password id="password-input" required="true" placeholder="Password" value="#{loginBean.password}"/>
-                <p:commandButton type="submit" id="submit-button" value="Login" action="#{loginBean.login()}"/>
+                <p:commandButton type="submit" id="submit-button" value="Login" action="#{loginBean.login()}" update="error-message, username-input, password-input"/>
+                <h:outputText id="error-message" value="#{loginBean.errorMessage}"/>
             </h:form>
     </p:outputPanel>
 
@@ -51,26 +52,25 @@
         const error404 = document.querySelector('#not-found');
         const loginButton = document.querySelector('#login-button');
         const overlay = document.querySelector('#overlay');
-        const loginForm = document.querySelector('#login-panel');
+        const loginPanel = document.querySelector('#login-panel');
 
         loginButton.addEventListener('click', () => {
             overlay.style.visibility = 'visible';
-            overlay.style.opacity = '0.5'
-            loginForm.style.visibility = 'visible';
-            loginForm.style.opacity = '1';
+            overlay.style.opacity = '0.5';
+            loginPanel.style.visibility = 'visible';
+            loginPanel.style.opacity = '1';
         });
 
         overlay.addEventListener('click', () => {
             overlay.style.visibility = 'hidden';
-            overlay.style.opacity = '0'
-            loginForm.style.visibility = 'hidden';
-            loginForm.style.opacity = '0';
+            overlay.style.opacity = '0';
+            loginPanel.style.visibility = 'hidden';
+            loginPanel.style.opacity = '0';
         });
 
         search.addEventListener('click', () => {
             setTimeout(function () {
                 if(document.querySelector('#emission-data').innerText === ''){
-                    console.log('Not found');
                     container.style.height = '400px';
                     resultBox.style.display = 'none';
                     error404.style.display = 'block';
