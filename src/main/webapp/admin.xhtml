@@ -12,29 +12,27 @@
    <title>Like Hero To Zero</title>
 </h:head>
 <h:body>
-   <h:dataTable value="#{pendingRequestBean.requests}" var="pendingRequest">
-      <h:column>
-         <f:facet name="header">ID</f:facet>
-         #{pendingRequest.id}
-      </h:column>
-      <h:column>
-         <f:facet name="header">Username</f:facet>
-         #{pendingRequest.username}
-      </h:column>
-      <h:column>
-         <f:facet name="header">Land</f:facet>
-         #{pendingRequest.country}
-      </h:column>
-      <h:column>
-         <f:facet name="header">Emissionswert</f:facet>
-         #{pendingRequest.emissionData}
-      </h:column>
-      <h:column>
-         <f:facet name="header">Aktionen</f:facet>
-         <p:commandButton value="Löschen" action="#{pendingRequestBean.deleteRequest()}"/>
-         <p:commandButton value="Bestätigen" action="#{pendingRequestBean.confirmRequest()}"/>
-      </h:column>
-   </h:dataTable>
+   <h:form id="pendingRequestsTable">
+      <h:dataTable value="#{pendingRequestBean.requests}" var="pendingRequest">
+         <h:column>
+            <f:facet name="header">Username</f:facet>
+            #{pendingRequest.username}
+         </h:column>
+         <h:column>
+            <f:facet name="header">Land</f:facet>
+            #{pendingRequest.country}
+         </h:column>
+         <h:column>
+            <f:facet name="header">Emissionswert</f:facet>
+            #{pendingRequest.emissionData}
+         </h:column>
+         <h:column>
+            <f:facet name="header">Aktionen</f:facet>
+            <p:commandButton value="Löschen" action="#{pendingRequestBean.deleteRequest(pendingRequest)}" update="pendingRequestsTable"/>
+            <p:commandButton value="Bestätigen" action="#{pendingRequestBean.confirmRequest(pendingRequest)}" update="pendingRequestsTable"/>
+         </h:column>
+      </h:dataTable>
+      </h:form>
 </h:body>
 
 </html>

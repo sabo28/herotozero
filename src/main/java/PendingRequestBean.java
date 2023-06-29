@@ -1,5 +1,4 @@
 import jakarta.annotation.PostConstruct;
-import jakarta.el.MethodExpression;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -22,12 +21,17 @@ public class PendingRequestBean {
     public List<PendingRequest> getRequests() {
         return requests;
     }
+    
 
-    public MethodExpression deleteRequest() {
-        return null;
+    public void confirmRequest(PendingRequest pendingRequest) {
+        if (dataController.confirmRequest(pendingRequest)){
+            requests.remove(pendingRequest);
+        }
     }
 
-    public MethodExpression confirmRequest() {
-        return null;
+    public void deleteRequest(PendingRequest pendingRequest) {
+        if (dataController.deleteRequest(pendingRequest)){
+            requests.remove(pendingRequest);
+        }
     }
 }

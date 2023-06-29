@@ -242,3 +242,7 @@ body{
     font-weight: bold;
     color: white;
 }
+
+#pendingRequestsTable {
+    color: white;
+}

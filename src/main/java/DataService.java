@@ -20,6 +20,8 @@ public class DataService {
             if (resultSet.next()) {
                 emissionData = resultSet.getString("emissionswert");
             }
+
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,6 +50,8 @@ public class DataService {
                 // Benutzername und Passwort stimmen nicht überein
                 userStatus = "Wrong username or password";
             }
+
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,6 +71,7 @@ public class DataService {
                     columnData.add(data);
                 }
 
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -88,6 +93,8 @@ public class DataService {
             }else{
                 pendingStatus = "Anfrage geschickt";
             }
+
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -115,9 +122,45 @@ public class DataService {
                 requests.add(pendingRequest);
             }
 
+            statement.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return requests;
+    }
+
+    public boolean confirmRequest(PendingRequest pendingRequest) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE emissions SET emissionswert = ? WHERE land = ?");
+            updateStatement.setString(1, pendingRequest.getEmissionData());
+            updateStatement.setString(2, pendingRequest.getCountry());
+            updateStatement.executeUpdate();
+
+            PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM pendingrequests WHERE id = ?");
+            deleteStatement.setInt(1, pendingRequest.getId());
+            deleteStatement.executeUpdate();
+
+            deleteStatement.close();
+            updateStatement.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deleteRequest(PendingRequest pendingRequest) {
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM pendingrequests WHERE id = ?");
+            statement.setInt(1, pendingRequest.getId());
+            statement.executeUpdate();
+
+            statement.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

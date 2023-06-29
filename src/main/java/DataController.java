@@ -26,4 +26,12 @@ public class DataController {
     public List<PendingRequest> getAllPendingRequests() throws ClassNotFoundException {
         return dataService.getAllPendingRequests();
     }
+
+    public boolean confirmRequest(PendingRequest pendingRequest) {
+        return dataService.confirmRequest(pendingRequest);
+    }
+
+    public boolean deleteRequest(PendingRequest pendingRequest) {
+        return dataService.deleteRequest(pendingRequest);
+    }
 }
