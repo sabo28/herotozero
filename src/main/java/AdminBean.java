@@ -1,15 +1,19 @@
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.util.List;
+import java.util.Objects;
 
 @Named
 @RequestScoped
-public class PendingRequestBean {
+public class AdminBean {
 
     private List<PendingRequest> requests;
+    private String auth;
 
     @Inject
     private DataController dataController;
@@ -32,6 +36,22 @@ public class PendingRequestBean {
     public void deleteRequest(PendingRequest pendingRequest) {
         if (dataController.deleteRequest(pendingRequest)){
             requests.remove(pendingRequest);
+        }
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public String confirmAuth() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        String userRole = (String) externalContext.getSessionMap().get("userRole");
+        if (Objects.equals(userRole, "admin")) {
+            return null;
+        }else {
+            this.auth = "empty";
+            return "Not authorized";
         }
     }
 }

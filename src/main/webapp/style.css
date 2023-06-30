@@ -74,26 +74,16 @@ body{
 }
 
 #result-box{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    scale: 0;
-    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #result-box #emission-data{
-    position: relative;
     color: #06283D;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 800;
-    margin-top: 30px;
-}
-
-#weather-box #emission-data span{
-    position: absolute;
-    margin-left: 4px;
-    font-size: 1.5rem;
+    margin-top: 80px;
 }
 
 #not-found{
@@ -244,5 +234,38 @@ body{
 }
 
 #pendingRequestsTable {
+    margin-bottom: 20px;
+}
+
+#pendingRequestsTable h1 {
     color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#confirm-auth {
+    color: white;
+}
+
+#pendingRequestsTable table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#pendingRequestsTable th,
+#pendingRequestsTable td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+#pendingRequestsTable td {
+    color: white;
+}
+
+#pendingRequestsTable th {
+    background-color: #f2f2f2;
+}
+
+#pendingRequestsTable button {
+    margin-right: 5px;
 }

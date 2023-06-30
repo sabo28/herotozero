@@ -12,8 +12,10 @@
    <title>Like Hero To Zero</title>
 </h:head>
 <h:body>
-   <h:form id="pendingRequestsTable">
-      <h:dataTable value="#{pendingRequestBean.requests}" var="pendingRequest">
+   <h:outputText id="confirm-auth" value="#{adminBean.confirmAuth()}" />
+   <h:form id="pendingRequestsTable" rendered="#{empty adminBean.auth}">
+      <h1>Pending Requests</h1>
+      <h:dataTable value="#{adminBean.requests}" var="pendingRequest">
          <h:column>
             <f:facet name="header">Username</f:facet>
             #{pendingRequest.username}
@@ -28,11 +30,12 @@
          </h:column>
          <h:column>
             <f:facet name="header">Aktionen</f:facet>
-            <p:commandButton value="Löschen" action="#{pendingRequestBean.deleteRequest(pendingRequest)}" update="pendingRequestsTable"/>
-            <p:commandButton value="Bestätigen" action="#{pendingRequestBean.confirmRequest(pendingRequest)}" update="pendingRequestsTable"/>
+            <p:commandButton styleClass="ui-button-danger" value="Delete" action="#{adminBean.deleteRequest(pendingRequest)}" update="pendingRequestsTable"/>
+            <p:commandButton styleClass="ui-button-success" value="Confirm" action="#{adminBean.confirmRequest(pendingRequest)}" update="pendingRequestsTable"/>
          </h:column>
       </h:dataTable>
-      </h:form>
+      <p:commandButton id="logout-button" value="Logout" action="#{loginBean.logout()}" styleClass="ui-button-danger" />
+   </h:form>
 </h:body>
 
 </html>

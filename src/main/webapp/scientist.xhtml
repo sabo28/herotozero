@@ -11,15 +11,17 @@
 </h:head>
 
 <h:body>
-    <h:form id="request-form">
-        <h1>Anfrage</h1>
-        <p>Neue Emissionsdaten müssen erst bestätigt werden, bevor sie sichtbar sind.</p>
-        <p:selectOneMenu value="#{allCountriesBean.selectedCountry}" required="true">
-            <f:selectItems value="#{allCountriesBean.options}" />
-        </p:selectOneMenu>
-        <h:inputText id="input-value" value="#{allCountriesBean.inputValue}"/>
-        <p:commandButton value="Submit" action="#{allCountriesBean.submitData()}" update="pending-status"/>
-        <h:outputText id="pending-status" value="#{allCountriesBean.pendingStatus}"/>
+    <h:outputText id="confirm-auth" value="#{scientistBean.confirmAuth()}" />
+    <h:form id="request-form" rendered="#{empty scientistBean.auth}">
+            <h1>New Data Requests</h1>
+            <p>New emissions data must first be confirmed before they are visible.</p>
+            <p:selectOneMenu value="#{scientistBean.selectedCountry}" required="true">
+                <f:selectItems value="#{scientistBean.options}" />
+            </p:selectOneMenu>
+            <h:inputText id="input-value" value="#{scientistBean.inputValue}"/>
+            <p:commandButton value="Submit" action="#{scientistBean.submitData()}" update="pending-status"/>
+            <p:commandButton id="logout-button" value="Logout" action="#{loginBean.logout()}" styleClass="ui-button-danger" />
+            <h:outputText id="pending-status" value="#{scientistBean.pendingStatus}"/>
     </h:form>
 </h:body>
 </html>

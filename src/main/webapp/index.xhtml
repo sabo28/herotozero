@@ -16,7 +16,7 @@
         <h:form id="search-box">
             <i class="fa-solid fa-location-dot"></i>
             <p:inputText id="input-text" placeholder="Enter your location" type="text" value="#{co2EmissionBean.country}"/>
-            <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-primary" action="#{co2EmissionBean.data()}" update="emission-data"/>
+            <p:commandButton icon="pi pi-search" styleClass="rounded-button ui-button-primary" action="#{co2EmissionBean.fetchEmissionData()}" update="emission-data"/>
         </h:form>
 
         <p:outputPanel id="not-found">
@@ -80,7 +80,7 @@
 
             error404.style.display = 'none';
             error404.classList.remove('fade-in');
-            resultBox.style.display = 'block';
+            resultBox.style.display = 'flex';
             resultBox.classList.add('fade-in');
             container.style.height = '400px';
         });

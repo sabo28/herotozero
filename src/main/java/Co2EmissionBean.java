@@ -2,14 +2,14 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.io.Serializable;
+
 @Named
 @RequestScoped
-public class Co2EmissionBean {
+public class Co2EmissionBean implements Serializable {
     private String country;
     private String emissionData;
 
-    public Co2EmissionBean() {
-    }
     @Inject
     private DataController dataController;
 
@@ -25,7 +25,7 @@ public class Co2EmissionBean {
         return emissionData;
     }
 
-    public void data() throws ClassNotFoundException {
+    public void fetchEmissionData() throws ClassNotFoundException {
         this.emissionData = dataController.getEmissionData(country);
     }
 }

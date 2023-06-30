@@ -1,4 +1,5 @@
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -46,5 +47,14 @@ public class LoginBean implements Serializable {
             this.errorMessage = status;
         }
         return status;
+    }
+
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+
+        username = null;
+        password = null;
+
+        return "index";
     }
 }
