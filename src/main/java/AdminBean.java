@@ -51,7 +51,7 @@ public class AdminBean {
             return null;
         }else {
             this.auth = "empty";
-            return "Not authorized";
+            return "Not authorized!";
         }
     }
 }

@@ -1,4 +1,5 @@
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -42,9 +43,15 @@ public class LoginBean implements Serializable {
     public String login() throws ClassNotFoundException {
         String status = dataController.loginUser(username, password);
         if(Objects.equals(status, "Wrong username or password")){
-            this.username = "";
-            this.password = "";
-            this.errorMessage = status;
+            username = null;
+            password = null;
+            errorMessage = status;
+        }else if (status.equals("admin")){
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userRole", "admin");
+            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
+        } else if (status.equals("scientist")) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userRole", "scientist");
         }
         return status;
     }
