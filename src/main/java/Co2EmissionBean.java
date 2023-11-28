@@ -2,6 +2,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import javax.xml.crypto.Data;
 import java.io.Serializable;
 
 @Named
@@ -9,10 +10,8 @@ import java.io.Serializable;
 public class Co2EmissionBean implements Serializable {
     private String country;
     private String emissionData;
-
     @Inject
     private DataController dataController;
-
     public String getCountry() {
         return country;
     }

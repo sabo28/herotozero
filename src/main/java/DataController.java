@@ -6,7 +6,10 @@ import java.util.List;
 @Named
 @RequestScoped
 public class DataController {
+    public DataController() {
+    }
     private final DataService dataService = new DataService();
+
     public String getEmissionData(String country) throws ClassNotFoundException {
         return dataService.fetchEmissionData(country).isEmpty() ? dataService.fetchEmissionData(country) : dataService.fetchEmissionData(country) + "kt";
     }

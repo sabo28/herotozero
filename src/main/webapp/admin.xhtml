@@ -12,8 +12,8 @@
    <title>Like Hero To Zero</title>
 </h:head>
 <h:body>
-   <h:outputText id="confirm-auth" value="#{adminBean.confirmAuth()}" />
-   <h:form id="pendingRequestsTable" rendered="#{empty adminBean.auth}">
+   <h:outputText id="confirm-auth" value="Not authorized!" rendered="#{empty loginBean.isLoggedInAs or loginBean.isLoggedInAs == 'scientist'}" />
+   <h:form id="pendingRequestsTable" rendered="#{loginBean.isLoggedInAs == 'admin'}">
       <h1>Pending Requests</h1>
       <h:dataTable value="#{adminBean.requests}" var="pendingRequest">
          <h:column>

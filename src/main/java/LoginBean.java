@@ -1,11 +1,6 @@
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.context.ExternalContext;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import java.io.Serializable;
-import java.util.Objects;
 
 @Named
 @SessionScoped
@@ -13,12 +8,10 @@ public class LoginBean implements Serializable {
     private String username;
     private String password;
     private String errorMessage;
+    private String isLoggedInAs;
 
     public LoginBean() {
     }
-
-    @Inject
-    private DataController dataController;
 
     public String getUsername() {
         return username;
@@ -40,28 +33,43 @@ public class LoginBean implements Serializable {
         return errorMessage;
     }
 
+    public String getIsLoggedInAs() {
+        return isLoggedInAs;
+    }
+
+    public void setIsLoggedInAs(String isLoggedInAs) {
+        this.isLoggedInAs = isLoggedInAs;
+    }
+
     public String login() throws ClassNotFoundException {
+        DataController dataController = new DataController();
         String status = dataController.loginUser(username, password);
-        if(Objects.equals(status, "Wrong username or password")){
+        if (status.equals("admin")){
+            isLoggedInAs = status;
+            return "admin";
+        } else if (status.equals("scientist")) {
+            isLoggedInAs = status;
+            return "scientist";
+        }else {
             username = null;
             password = null;
+            isLoggedInAs = null;
             errorMessage = status;
-        }else if (status.equals("admin")){
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userRole", "admin");
-            System.out.println(FacesContext.getCurrentInstance().getExternalContext().getSessionMap());
-        } else if (status.equals("scientist")) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userRole", "scientist");
         }
         return status;
     }
 
     public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 
         username = null;
         password = null;
+        errorMessage = null;
+        isLoggedInAs = null;
 
         return "index";
+    }
+
+    public void resetErrorMessage() {
+        errorMessage = null;
     }
 }

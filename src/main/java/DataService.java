@@ -12,13 +12,13 @@ public class DataService {
         String emissionData = "";
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            String query = "SELECT emissionswert FROM emissions WHERE land = ?";
+            String query = "SELECT emissiondata FROM emissions WHERE country = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, country);
 
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                emissionData = resultSet.getString("emissionswert");
+                emissionData = resultSet.getString("emissiondata");
             }
 
             statement.close();
@@ -63,11 +63,11 @@ public class DataService {
         List<String> columnData = new ArrayList<>();
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            String query = "SELECT land FROM emissions";
+            String query = "SELECT country FROM emissions";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
-                    String data = resultSet.getString("land");
+                    String data = resultSet.getString("country");
                     columnData.add(data);
                 }
 
@@ -83,15 +83,15 @@ public class DataService {
         String pendingStatus = "";
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            String query = "INSERT INTO pendingrequests (username, land, emissionwert) VALUES (?, ?, ?)";
+            String query = "INSERT INTO pendingrequests (username, country, emissiondata) VALUES (?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, selectedCountry);
             statement.setString(3, inputValue);
             if (statement.executeUpdate() == 0){
-                pendingStatus = "Anfrage fehlgeschlagen";
+                pendingStatus = "Request failed";
             }else{
-                pendingStatus = "Anfrage geschickt";
+                pendingStatus = "Request sent successfully";
             }
 
             statement.close();
@@ -116,8 +116,8 @@ public class DataService {
                 PendingRequest pendingRequest = new PendingRequest();
                 pendingRequest.setId(resultSet.getInt("id"));
                 pendingRequest.setUsername(resultSet.getString("username"));
-                pendingRequest.setCountry(resultSet.getString("land"));
-                pendingRequest.setEmissionData(resultSet.getString("emissionwert"));
+                pendingRequest.setCountry(resultSet.getString("country"));
+                pendingRequest.setEmissionData(resultSet.getString("emissiondata"));
 
                 requests.add(pendingRequest);
             }
@@ -132,7 +132,7 @@ public class DataService {
 
     public boolean confirmRequest(PendingRequest pendingRequest) {
         try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)) {
-            PreparedStatement updateStatement = connection.prepareStatement("UPDATE emissions SET emissionswert = ? WHERE land = ?");
+            PreparedStatement updateStatement = connection.prepareStatement("UPDATE emissions SET emissiondata = ? WHERE country = ?");
             updateStatement.setString(1, pendingRequest.getEmissionData());
             updateStatement.setString(2, pendingRequest.getCountry());
             updateStatement.executeUpdate();

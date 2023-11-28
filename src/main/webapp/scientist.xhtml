@@ -11,8 +11,8 @@
 </h:head>
 
 <h:body>
-    <h:outputText id="confirm-auth" value="#{scientistBean.confirmAuth()}" />
-    <h:form id="request-form" rendered="#{empty scientistBean.auth}">
+    <h:outputText id="confirm-auth" value="Not authorized!" rendered="#{empty loginBean.isLoggedInAs or loginBean.isLoggedInAs == 'admin'}" />
+    <h:form id="request-form" rendered="#{loginBean.isLoggedInAs == 'scientist'}">
             <h1>New Data Requests</h1>
             <p>New emissions data must first be confirmed before they are visible.</p>
             <p:selectOneMenu value="#{scientistBean.selectedCountry}" required="true">

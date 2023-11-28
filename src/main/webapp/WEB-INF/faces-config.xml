@@ -17,4 +17,20 @@
             <redirect />
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/admin.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/scientist.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

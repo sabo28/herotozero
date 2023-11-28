@@ -11,8 +11,8 @@ cnx = mysql.connector.connect(user='root', password='password',
 create_table_emissions_query = """
 CREATE TABLE IF NOT EXISTS emissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    land VARCHAR(255),
-    emissionswert VARCHAR(255)
+    country VARCHAR(255),
+    emissiondata VARCHAR(255)
 )
 """
 
@@ -28,8 +28,8 @@ create_table_pendingrequests_query = """
 CREATE TABLE IF NOT EXISTS pendingrequests (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255),
-    land VARCHAR(255),
-    emissionwert VARCHAR(255)
+    country VARCHAR(255),
+    emissiondata VARCHAR(255)
 )
 """
 
@@ -49,7 +49,7 @@ cursor.execute(query_1)
 cursor.execute(query_2)
 
 # Link zur CSV-Datei
-csv_url = 'https://myco2emissionbucket.s3.eu-central-1.amazonaws.com/world-bank-group-data/CO2_emissions/latest/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_5551845.csv'
+csv_url = 'https://myco2emissionbucket.s3.eu-central-1.amazonaws.com/world-bank-group-data/CO2_emissions/latest/API_EN.ATM.CO2E.KT_DS2_en_csv_v2_5871652.csv'
 
 # CSV-Datei herunterladen
 response = requests.get(csv_url)
@@ -68,12 +68,12 @@ next(csv_file)
 # Schleife über jede Zeile in der CSV-Datei
 for row in csv_file:
     land = row[0]  # Annahme: Das Land befindet sich in der ersten Spalte
-    emissionswert = row[63]
+    emissionswert = row[64]
     
     print(land, ": ", emissionswert)
 
     # SQL-Query zum Einfügen der Daten in die Tabelle
-    query = "INSERT INTO emissions (land, emissionswert) VALUES (%s, %s)"
+    query = "INSERT INTO emissions (country, emissiondata) VALUES (%s, %s)"
 
     # Daten in die Datenbank einfügen
     cursor = cnx.cursor()
