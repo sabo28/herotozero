@@ -1,5 +1,3 @@
-import com.mysql.cj.log.Log;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +8,7 @@ public class ScientistPanelTest {
     private LoginBean loginBean;
 
     @Before
-    public void setuo() throws ClassNotFoundException {
+    public void setup() {
         scientistBean = new ScientistBean();
         loginBean = new LoginBean();
     }

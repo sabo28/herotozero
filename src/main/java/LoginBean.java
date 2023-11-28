@@ -68,8 +68,4 @@ public class LoginBean implements Serializable {
 
         return "index";
     }
-
-    public void resetErrorMessage() {
-        errorMessage = null;
-    }
 }

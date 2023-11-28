@@ -30,11 +30,11 @@ public class DataController {
         return dataService.getAllPendingRequests();
     }
 
-    public boolean confirmRequest(PendingRequest pendingRequest) {
-        return dataService.confirmRequest(pendingRequest);
+    public void confirmRequest(PendingRequest pendingRequest) {
+        dataService.confirmRequest(pendingRequest);
     }
 
-    public boolean deleteRequest(PendingRequest pendingRequest) {
-        return dataService.deleteRequest(pendingRequest);
+    public void deleteRequest(PendingRequest pendingRequest) {
+         dataService.deleteRequest(pendingRequest);
     }
 }

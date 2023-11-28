@@ -5,7 +5,7 @@ public class AdminPanelTest {
 
     private AdminBean adminBean;
     @Before
-    public void setup() throws ClassNotFoundException {
+    public void setup() {
             adminBean = new AdminBean();
     }
 
