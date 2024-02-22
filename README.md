@@ -1,6 +1,6 @@
 # Like Hero To Zero
 
-Digitale Darstellung und Analyse von Umweltdaten
+Digitale Darstellung und Bearbeitung von weltweiten CO2-Emissionen.
 
 ## Voraussetzungen
 
