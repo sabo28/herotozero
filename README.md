@@ -1,6 +1,6 @@
 # Like Hero To Zero
 
-Kurze Beschreibung deines JSF-Projekts. Erkläre, was es macht, welche Probleme es löst und warum es nützlich ist.
+Digitale Darstellung und Analyse von Umweltdaten
 
 ## Voraussetzungen
 
