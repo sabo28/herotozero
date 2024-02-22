@@ -1,6 +1,6 @@
 # Like Hero To Zero
 
-IU Fallstudie zum Kurs IPWA02-01 Aufgabenstellung 1 Like Hero To Zero
+IU Fallstudie zum Kurs IPWA02-01 Aufgabenstellung 1 Like Hero To Zero.
 
 ## Voraussetzungen
 
