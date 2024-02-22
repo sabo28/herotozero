@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class Co2EmissionBean implements Serializable {
     private String country;
     private String emissionData;
-    @Inject
-    private DataController dataController;
+    private final DataController dataController = new DataController();
+
     public String getCountry() {
         return country;
     }

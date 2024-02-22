@@ -10,11 +10,8 @@ public class ScientistBean {
     private String selectedCountry;
     private String inputValue;
     private String pendingStatus;
-
-    @Inject
-    private DataController dataController;
-    @Inject
-    private LoginBean loginBean;
+    private String name;
+    private final DataController dataController = new DataController();
 
     public ScientistBean(){
     }
@@ -35,6 +32,14 @@ public class ScientistBean {
         this.inputValue = inputValue;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public List<String> getOptions() throws ClassNotFoundException {
         return dataController.getAllCountries();
     }
@@ -48,7 +53,7 @@ public class ScientistBean {
         if (!inputValue.matches("[0-9]+([.][0-9]+)?")) {
             this.pendingStatus = "Error: You can only enter numbers in this format: 1234 or 1234.1234";
         }else {
-            this.pendingStatus = dataController.sendNewEmissionData(selectedCountry, inputValue, loginBean.getUsername());
+            this.pendingStatus = dataController.sendNewEmissionData(selectedCountry, inputValue, name);
         }
     }
 }

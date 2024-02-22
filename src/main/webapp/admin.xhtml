@@ -21,15 +21,15 @@
             #{pendingRequest.username}
          </h:column>
          <h:column>
-            <f:facet name="header">Land</f:facet>
+            <f:facet name="header">Country</f:facet>
             #{pendingRequest.country}
          </h:column>
          <h:column>
-            <f:facet name="header">Emissionswert</f:facet>
+            <f:facet name="header">Value</f:facet>
             #{pendingRequest.emissionData}
          </h:column>
          <h:column>
-            <f:facet name="header">Aktionen</f:facet>
+            <f:facet name="header">Actions</f:facet>
             <p:commandButton styleClass="ui-button-danger" value="Delete" action="#{adminBean.deleteRequest(pendingRequest)}" update="pendingRequestsTable"/>
             <p:commandButton styleClass="ui-button-success" value="Confirm" action="#{adminBean.confirmRequest(pendingRequest)}" update="pendingRequestsTable"/>
          </h:column>

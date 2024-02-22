@@ -5,12 +5,10 @@ import static org.junit.Assert.assertEquals;
 
 public class ScientistPanelTest {
     private ScientistBean scientistBean;
-    private LoginBean loginBean;
 
     @Before
     public void setup() {
         scientistBean = new ScientistBean();
-        loginBean = new LoginBean();
     }
 
     @Test
@@ -21,26 +19,26 @@ public class ScientistPanelTest {
 
     @Test
     public void sendNewEmissionDataToAdmin() throws ClassNotFoundException {
-        String username = "testScientist";
+        String username = "jUnitScientist";
         String selectedCountry = "France";
         String inputValue = "983543.23";
 
-        loginBean.setUsername(username);
+        scientistBean.setName(username);
         scientistBean.setSelectedCountry(selectedCountry);
         scientistBean.setInputValue(inputValue);
         scientistBean.submitData();
 
-        assertEquals(scientistBean.getPendingStatus(), "Anfrage geschickt");
+        assertEquals(scientistBean.getPendingStatus(), "Request sent successfully");
         System.out.println(scientistBean.getPendingStatus());
     }
 
     @Test
     public void sendNewEmissionDataToAdminWithFalseInput() throws ClassNotFoundException {
-        String username = "testScientist";
+        String username = "jUnitScientist";
         String selectedCountry = "France";
         String inputValue = "983543,23";
 
-        loginBean.setUsername(username);
+        scientistBean.setName(username);
         scientistBean.setSelectedCountry(selectedCountry);
         scientistBean.setInputValue(inputValue);
         scientistBean.submitData();

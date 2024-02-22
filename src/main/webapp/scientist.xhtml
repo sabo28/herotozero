@@ -18,7 +18,8 @@
             <p:selectOneMenu value="#{scientistBean.selectedCountry}" required="true">
                 <f:selectItems value="#{scientistBean.options}" />
             </p:selectOneMenu>
-            <h:inputText id="input-value" value="#{scientistBean.inputValue}"/>
+            <p:inputText placeholder="Value" id="input-value" value="#{scientistBean.inputValue}"/>
+            <p:inputText placeholder="Name" id="input-name" value="#{scientistBean.name}"/>
             <p:commandButton value="Submit" action="#{scientistBean.submitData()}" update="pending-status"/>
             <p:commandButton id="logout-button" value="Logout" action="#{loginBean.logout()}" styleClass="ui-button-danger" />
             <h:outputText id="pending-status" value="#{scientistBean.pendingStatus}"/>

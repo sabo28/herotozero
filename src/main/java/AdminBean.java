@@ -7,9 +7,7 @@ import java.util.List;
 @RequestScoped
 public class AdminBean {
 
-    @Inject
-    private DataController dataController;
-
+    private final DataController dataController = new DataController();
     public AdminBean() {
     }
 
