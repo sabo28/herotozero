@@ -45,9 +45,9 @@ query_2 = "INSERT INTO users (username, password) SELECT 'scientist', 'Scientist
 
 # Pending requests initialisieren
 
-query_3 = "INSERT INTO pendingrequests (username, country, emissionsdata) SELECT 'scientist2', 'France', '25353.22'"
-query_4 = "INSERT INTO pendingrequests (username, country, emissionsdata) SELECT 'scientist3', 'Germany', '19231.22'"
-query_5 = "INSERT INTO pendingrequests (username, country, emissionsdata) SELECT 'scientist4', 'China', '112454.22'"
+query_3 = "INSERT INTO pendingrequests (username, country, emissiondata) SELECT 'scientist2', 'France', '25353.22'"
+query_4 = "INSERT INTO pendingrequests (username, country, emissiondata) SELECT 'scientist3', 'Germany', '19231.22'"
+query_5 = "INSERT INTO pendingrequests (username, country, emissiondata) SELECT 'scientist4', 'China', '112454.22'"
 
 # Daten in die Datenbank einfügen
 cursor = cnx.cursor()
