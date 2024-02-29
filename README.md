@@ -43,7 +43,8 @@ Nach der Datenbankinitialisierung kannst du dein JSF-Projekt wie folgt einrichte
 
 ## Nutzung
 
-Nachdem du das Projekt erfolgreich deployt hast, kannst du auf die Webanwendung über einen Webbrowser zugreifen. Beschreibe spezifische URLs, Benutzeraktionen oder Features, die verfügbar sind, um die Benutzerinteraktion mit deinem Projekt zu verdeutlichen.
+Nachdem du das Projekt erfolgreich deployt hast, kannst du auf die Webanwendung über einen Webbrowser zugreifen. Die Datenbank sollte wie folgt aussehen und damit kann gearbeitet werden: ![image](https://github.com/sabo28/herotozero/assets/29122270/bc5dd025-24d1-4145-963e-f389d53ef13e)
+
 
 ## Lizenz
 
