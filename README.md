@@ -48,7 +48,7 @@ Nachdem du das Projekt erfolgreich deployt hast, kannst du auf die Webanwendung 
 
 ## Lizenz
 
-Dieses Projekt steht unter der [MIT Lizenz](LICENSE). Weitere Details und die vollständige Lizenzvereinbarung findest du in der Datei `LICENSE`.
+Dieses Projekt steht unter der [MIT Lizenz](LICENSE.md). Weitere Details und die vollständige Lizenzvereinbarung findest du in der Datei `LICENSE`.
 
 ## Kontakt
 
