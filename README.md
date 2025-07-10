@@ -1,6 +1,6 @@
 # Like Hero To Zero
 
-IU Fallstudie zum Kurs IPWA02-01 Aufgabenstellung 1 Like Hero To Zero (Note 1,7).
+IU Fallstudie zum Kurs Programmierung von industriellen Informationssystemen mit Java EE Aufgabenstellung 1 Like Hero To Zero (Note 1,7).
 
 ## Voraussetzungen
 
